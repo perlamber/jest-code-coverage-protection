@@ -1,15 +1,15 @@
 {
-  "name": "jest-code-coverage-protection",
-  "version": "1.0.3",
-  "description": "Basic Code Coverage Protection Utility for comparing coverage between branches",
-  "main": "jccp.js",
+  "name": "jest-coverage-partial-compare",
+  "version": "1.0.0",
+  "description": "Compares the summary-coverage.json files between two branches",
+  "main": "jcpc.js",
   "scripts": {
     "test": "jest --coverage",
-    "jccp": "./jccp.js"
+    "jcpc": "./jcpc.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/jschaftenaar/jest-code-coverage-protection.git"
+    "url": "git+ssh://git@github.com/perlamber/jest-code-coverage-protection.git"
   },
   "keywords": [
     "code",
@@ -23,7 +23,7 @@
     "comparison"
   ],
   "bin": {
-    "jccp": "./jccp.js"
+    "jcpc": "./jcpc.js"
   },
   "jest": {
     "coverageReporters": [
@@ -31,12 +31,12 @@
       "json-summary"
     ]
   },
-  "author": "Jeroen Schaftenaar",
+  "author": "Jeroen Schaftenaar/Cristiano Oliveira",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jschaftenaar/jest-code-coverage-protection/issues"
+    "url": "https://github.com/perlamber/jest-code-coverage-protection/issues"
   },
-  "homepage": "https://github.com/jschaftenaar/jest-code-coverage-protection#readme",
+  "homepage": "https://github.com/perlamber/jest-code-coverage-protection#readme",
   "devDependencies": {
     "jest": "^26.4.2"
   },
