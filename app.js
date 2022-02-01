@@ -20,8 +20,19 @@ const app = {
       try {
         files[key] = JSON.parse(fs.readFileSync(options[key]));
       } catch(err) {
-        console.error(`Could not load ${options[key]}`);
-        process.exit(1);
+        if('file' == key){
+          if( err.message.indexOf("ENOENT: no such file or directory") != -1)
+          {
+            console.info(`No statistics to check at this time.`);
+            process.exit(0);  
+          }
+          console.error(err);
+          process.exit(1);  
+        }
+        else{
+          console.error(err);
+          process.exit(1);
+        }
       }
     })
 
