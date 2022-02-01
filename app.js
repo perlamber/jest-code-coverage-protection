@@ -16,6 +16,8 @@ const app = {
     const options = program.opts();
     const files = {};
 
+    console.info(`##Jest Coverage Partial Compare ## Version: ${options['version']}`);
+
     ['file', 'compare'].forEach((key, index) => {
       try {
         files[key] = JSON.parse(fs.readFileSync(options[key]));
@@ -78,6 +80,12 @@ const app = {
       }  
     });
     console.info(`Coverage check is completed.`);
+    if(exitCode > 0)
+    {
+      console.info(`Something went wrong, check the logs for more info.`);
+    } else {
+      console.info(`All the checks have passed succesfully.`);
+    }
     process.exit(exitCode);
   }
 }
