@@ -47,26 +47,35 @@ const app = {
     Object.keys(file).forEach((mkey) => {
       if(mkey!='total'){
         ['lines','branches'].forEach((key) => {
-          const pctDiff = (compare[mkey][key].pct - parseFloat(file[mkey][key].pct).toFixed(2));
-          if (parseFloat(pctDiff) > parseFloat(options.variance)) {
-            console.error(`Yikes, coverage for ${mkey} ${key} outside of limits, went from ${compare[mkey][key].pct} to ${file[mkey][key].pct}`);
-            exitCode = 1;
-          }
-          const totDiff = file[mkey][key].total - compare[mkey][key].total; // e.g. 20
-          if (totDiff<1) {
-            console.log(`Less or no ${key} changes, cannot determine coverage difference, skipping`);
-          } else {
-            
-            const coverageDiff = file[mkey][key].covered - compare[mkey][key].covered; // e.g. 18
-            const newCoveragePct = parseFloat(coverageDiff / totDiff * 100);
-            if (newCoveragePct < minCov) {
-              console.error(`Yikes, coverage for ${mkey} ${key} outside of limits, new code coverage is ${newCoveragePct}, was expecting at least ${minCov}`);
+          let compareEntry = compare[mkey];
+          if(!compareEntry) {
+            const pctNewDiff = parseFloat(file[mkey][key].pct).toFixed(2) + parseFloat(options.variance);
+            if (parseFloat(pctNewDiff) < parseFloat(options.new)) {
+              console.error(`Yikes, coverage for ${mkey} ${key} outside of limits, went from ${compareEntry[key].pct} to ${file[mkey][key].pct}`);
               exitCode = 1;
             }
           }
+          else {
+            const pctDiff = (compareEntry[key].pct - parseFloat(file[mkey][key].pct).toFixed(2));
+            if (parseFloat(pctDiff) > parseFloat(options.variance)) {
+              console.error(`Yikes, coverage for ${mkey} ${key} outside of limits, went from ${compareEntry[key].pct} to ${file[mkey][key].pct}`);
+              exitCode = 1;
+            }
+            const totDiff = file[mkey][key].total - compare[mkey][key].total; // e.g. 20
+            if (totDiff<1) {
+              console.log(`Less or no ${key} changes, cannot determine coverage difference, skipping`);
+            } 
+            else {
+              const coverageDiff = file[mkey][key].covered - compare[mkey][key].covered; // e.g. 18
+              const newCoveragePct = parseFloat(coverageDiff / totDiff * 100);
+              if (newCoveragePct < minCov) {
+                console.error(`Yikes, coverage for ${mkey} ${key} outside of limits, new code coverage is ${newCoveragePct}, was expecting at least ${minCov}`);
+                exitCode = 1;
+              }
+            }
+          }
         });
-      }
-       
+      }  
     });
     console.info(`Coverage check is completed.`);
     process.exit(exitCode);
