@@ -1,5 +1,5 @@
 # jest-coverage-partial-comparison
-This is a fork from https://github.com/jschaftenaar/jest-code-coverage-protection, the fndamental difference is that it compares each file from the report instead of the summarized total. This means it supports the "changedSince" option present in Jest configuration, now we don;t need to run the entire test suite in order to compare the coverage to the a previous state.
+This is a fork from https://github.com/jschaftenaar/jest-code-coverage-protection, the fundamental difference is that it compares each file from the report instead of the summarized total. This means it supports the "changedSince" option present in Jest configuration, now we don;t need to run the entire test suite in order to compare the coverage to the a previous state.
 
 ## Requirements
 - Add `json-summary` as coverage reporter to jest configuration
