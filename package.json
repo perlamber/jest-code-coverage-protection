@@ -1,6 +1,6 @@
 {
   "name": "jest-coverage-partial-compare",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Compares the summary-coverage.json files between two branches",
   "main": "jcpc.js",
   "scripts": {
